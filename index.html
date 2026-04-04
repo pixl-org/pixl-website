@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXL | People, Interaction, and eXperience Lab</title>
+    <meta name="description"
+        content="PIXL is an intercollegiate community for HCI, XR, and Game Dev. Beginner-friendly and inclusive. Join us to build your future.">
+
+    <!-- Open Graph / SEO -->
+    <meta property="og:title" content="PIXL - Build Your Future in HCI & XR">
+    <meta property="og:description"
+        content="Beginner-friendly community for students in Game Dev, HCI, and AR/VR. Join our GDC raffle!">
+    <meta property="og:image" content="pixl_logo_pixel.png">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #fcfcfc;
+            --bg-pattern: #f0f0f0;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+
+            --accent-purple: #a29bfe;
+            /* Main */
+            --accent-red: #ff7675;
+            --accent-green: #55efc4;
+            --accent-blue: #74b9ff;
+            --accent-yellow: #ffeaa7;
+
+            --pixel-border: 4px solid #2d3436;
+            --pixel-border-thin: 2px solid #2d3436;
+            --shadow-hard: 6px 6px 0px #2d3436;
+            --shadow-hover: 8px 8px 0px #2d3436;
+
+            --font-pixel: 'Press Start 2P', cursive;
+            --font-body: 'Outfit', sans-serif;
+
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            background-image: radial-gradient(var(--bg-pattern) 1px, transparent 1px);
+            background-size: 20px 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: default;
+            /* We'll add a custom cursor via JS hint strictly if needed, but standard is safer for now */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .pixel-font {
+            font-family: var(--font-pixel);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* Pixel Box Style */
+        .pixel-box {
+            background: white;
+            border: var(--pixel-border-thin);
+            box-shadow: var(--shadow-hard);
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .pixel-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pixel-box--purple {
+            border-color: var(--accent-purple);
+            box-shadow: 6px 6px 0px var(--accent-purple);
+        }
+
+        .pixel-box--purple:hover {
+            box-shadow: 8px 8px 0px var(--accent-purple);
+        }
+
+        /* Buttons */
+        .btn-pixel {
+            display: inline-block;
+            font-family: var(--font-pixel);
+            font-size: 0.8rem;
+            padding: 16px 24px;
+            background: var(--accent-purple);
+            color: #fff;
+            border: 4px solid #2d3436;
+            box-shadow: 4px 4px 0px #2d3436;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-pixel:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #2d3436;
+        }
+
+        .btn-pixel:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #2d3436;
+        }
+
+        .btn-red {
+            background: var(--accent-red);
+        }
+
+        .btn-green {
+            background: var(--accent-green);
+        }
+
+        .btn-blue {
+            background: var(--accent-blue);
+        }
+
+        /* Subtle sparkle on hover (CSS only element) */
+        .btn-pixel::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg) translateY(100%);
+            transition: transform 0.4s;
+            pointer-events: none;
+        }
+
+        .btn-pixel:hover::after {
+            transform: rotate(45deg) translateY(-100%);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: var(--pixel-border-thin);
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-pixel);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            width: 40px;
+            height: auto;
+            image-rendering: pixelated;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-anchor {
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-anchor::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 3px;
+            background: var(--accent-purple);
+            transition: width 0.3s;
+        }
+
+        .nav-anchor:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .navbar .btn-pixel {
+                padding: 8px 12px;
+                font-size: 0.65rem;
+                border-width: 2px;
+                box-shadow: 2px 2px 0 #2d3436;
+            }
+
+            .nav-buttons {
+                gap: 5px !important;
+            }
+
+            /* Mobile menu simplified for single page */
+        }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: var(--font-pixel);
+            font-size: 2.5rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--text-light);
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pixel-deco {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* --- STORY SECTION --- */
+        .mission-text {
+            border-left: 8px solid var(--accent-purple);
+            padding-left: 30px;
+            font-size: 1.1rem;
+            font-style: italic;
+            background: #fff;
+            padding: 40px;
+            border-radius: 0 10px 10px 0;
+            /* Soft hybrid feel */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- CARDS GRID --- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-pixel);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #000;
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        /* --- MAJORS GRID --- */
+        .majors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .major-chip {
+            padding: 8px 16px;
+            background: #fff;
+            border: 2px solid #2d3436;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .major-chip:hover {
+            background: var(--accent-green);
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        /* --- CAROUSEL --- */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border: var(--pixel-border);
+            background: #000;
+            height: 400px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            filter: grayscale(20%);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            background: white;
+            padding: 30px;
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .carousel-nav button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            border: 4px solid #000;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 10;
+            font-family: var(--font-pixel);
+            font-size: 1.2rem;
+        }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        /* --- GDC SPECIAL SECTION --- */
+        .gdc-section {
+            background: linear-gradient(135deg, #a29bfe22 0%, #74b9ff22 100%);
+            border-top: 4px solid var(--accent-purple);
+            border-bottom: 4px solid var(--accent-purple);
+        }
+
+        .gdc-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 800px) {
+            .gdc-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gdc-card {
+            background: #fff;
+            padding: 30px;
+            border: 4px solid var(--accent-purple);
+            box-shadow: 8px 8px 0px rgba(162, 155, 254, 0.5);
+        }
+
+        .accordion-item {
+            margin-bottom: 10px;
+            border: 2px solid #eee;
+        }
+
+        .accordion-header {
+            width: 100%;
+            text-align: left;
+            padding: 15px;
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .accordion-content {
+            padding: 15px;
+            background: #fafafa;
+            display: none;
+            border-top: 1px solid #eee;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .accordion-item.active .accordion-header {
+            background: #f0f0f0;
+        }
+
+        /* --- TEAM --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .team-card {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border: 2px solid #ccc;
+        }
+
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #eee;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        footer {
+            background: #2d3436;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            font-family: var(--font-pixel);
+            font-size: 0.7rem;
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.2s;
+            image-rendering: pixelated;
+            /* Keeps pixel art crisp */
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <img src="pixl_logo_pixel.png" alt="PIXL Logo">
+                <span style="color:#2d3436;">PIXL</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-anchor">About</a>
+                <a href="#hackathon" class="nav-anchor" style="color:var(--accent-purple)">Hackathon</a>
+                <a href="#events" class="nav-anchor">Events</a>
+                <a href="#join" class="nav-anchor">Join</a>
+                <div style="width:1px; height:20px; background:#ddd; margin:0 5px;"></div>
+                <a href="https://instagram.com/join.pixl" target="_blank" title="Instagram">
+                    <img src="instagram_icon.png" alt="IG"
+                        style="width:24px; height:24px; image-rendering:pixelated; transition:transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+                <a href="https://discord.gg/HnxZbA6fj5" target="_blank" title="Discord">
+                    <img src="discord_icon.png" alt="Discord"
+                        style="width:24px; height:24px; image-rendering:pixelated; transition:transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+            </div>
+            <div class="nav-buttons" style="display:flex; gap:10px;">
+                <a href="https://forms.gle/Eq2QU8UYRTdgFCW2A" target="_blank" class="btn-pixel btn-green">Officer
+                    Apps</a>
+                <a href="https://discord.gg/HnxZbA6fj5" target="_blank" class="btn-pixel">Join PIXL</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero container">
+        <span class="pixel-deco" style="top:20%; left:10%; color: var(--accent-red)">✚</span>
+        <span class="pixel-deco" style="top:15%; right:15%; color: var(--accent-blue); animation-delay: 1s;">●</span>
+        <span class="pixel-deco"
+            style="bottom:20%; left:20%; color: var(--accent-green); animation-delay: 0.5s;">★</span>
+
+        <p class="pixel-font"
+            style="color:var(--accent-purple); font-size:0.8rem; margin-bottom:20px; letter-spacing:1px;">WELCOME TO THE
+            LAB</p>
+        <h1 id="hero-title" style="min-height: 2.8em;"></h1>
+        <p>A beginner-friendly intercollegiate community for HCI, XR, and Game Dev. We empower voices that haven’t been
+            represented in tech.</p>
+
+        <div class="hero-btns">
+            <a href="https://luma.com/worldsinaction-sf26" target="_blank" class="btn-pixel btn-red">Worlds In
+                Action</a>
+            <a href="https://terplink.umd.edu/organization/pixl" target="_blank" class="btn-pixel btn-secondary">Join
+                via TerpLink</a>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:20px; margin-top:30px; align-items:center;">
+            <span class="pixel-font" style="font-size:0.6rem; color:#aaa;">FOLLOW US:</span>
+            <a href="https://instagram.com/join.pixl" target="_blank" style="opacity:0.6; transition:0.2s;"
+                onmouseover="this.style.opacity='1'; this.style.transform='scale(1.1)'"
+                onmouseout="this.style.opacity='0.6'; this.style.transform='scale(1)'">
+                <img src="instagram_icon.png" alt="IG" style="width:24px; height:24px; image-rendering:pixelated;">
+            </a>
+            <a href="https://discord.gg/HnxZbA6fj5" target="_blank" style="opacity:0.6; transition:0.2s;"
+                onmouseover="this.style.opacity='1'; this.style.transform='scale(1.1)'"
+                onmouseout="this.style.opacity='0.6'; this.style.transform='scale(1)'">
+                <img src="discord_icon.png" alt="DC" style="width:24px; height:24px; image-rendering:pixelated;">
+            </a>
+            </a>
+        </div>
+    </section>
+
+    <!-- BANNER FOR OFFICER APPS -->
+    <div
+        style="background:var(--accent-red); color:#fff; text-align:center; padding: 30px 20px; border-top: var(--pixel-border-thin); border-bottom: var(--pixel-border-thin);">
+        <h2 class="pixel-font" style="font-size: 1.2rem; margin-bottom: 15px; text-shadow: 2px 2px 0 #000;">🚨 PIXL
+            OFFICER APPLICATIONS OPEN 🚨</h2>
+        <p style="max-width: 800px; margin: 0 auto 15px; font-size: 1.1rem; text-shadow: 1px 1px 0 #000;">To make an
+            even bigger impact and add more conferences + opportunities to our agenda, we need your help! It's a great
+            way to make amazing connections and add to your resume. <br><strong>Deadline: March 5th</strong>.</p>
+        <a href="https://forms.gle/Eq2QU8UYRTdgFCW2A" target="_blank" class="btn-pixel"
+            style="background:#fff; color:var(--accent-red); margin-top: 10px;">Apply to be an officer</a>
+    </div>
+
+    <!-- STORY / WHY PIXL -->
+    <section id="about" class="container section-padding">
+        <div class="gdc-layout" style="align-items: center;">
+            <div>
+                <h2 class="pixel-font" style="margin-bottom:20px;">Why We Exist</h2>
+                <p style="margin-bottom:20px;">PIXL was founded on a simple truth: talent is universal, but opportunity
+                    is not. Too often, students feel like the "only one" in the room in technical spaces.</p>
+                <div class="mission-text">
+                    "On paper, my XR journey looked like a dream... But something always felt off. I was often the ‘only
+                    one’ in the room… PIXL exists so more people can feel included and capable to build."
+                    <br><br><strong>— Ananya Srinivasan, Founder</strong>
+                </div>
+            </div>
+            <div class="pixel-box pixel-box--purple">
+                <h3 class="pixel-font" style="margin-bottom:20px; text-align:center;">What We Provide</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                    <div class="text-center">
+                        <div class="feature-icon" style="margin:0 auto 10px;">🎓</div>
+                        <strong>Mentorship</strong>
+                        <p style="font-size:0.85rem; color:#666;">NASA, Meta, Apple mentors</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="feature-icon" style="margin:0 auto 10px;">📚</div>
+                        <strong>Education</strong>
+                        <p style="font-size:0.85rem; color:#666;">Free bootcamps & workshops</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="feature-icon" style="margin:0 auto 10px;">🎟️</div>
+                        <strong>Access</strong>
+                        <p style="font-size:0.85rem; color:#666;">GDC conferences & events</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="feature-icon" style="margin:0 auto 10px;">🔬</div>
+                        <strong>Research</strong>
+                        <p style="font-size:0.85rem; color:#666;">Top-tier labs (UMD/CMU)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAJORS WELCOME -->
+    <section class="container section-padding text-center"
+        style="background: #fff; border: var(--pixel-border-thin); padding: 40px;">
+        <h2 class="pixel-font" style="margin-bottom:10px;">ALL MAJORS WELCOME</h2>
+        <p style="margin-bottom:30px; font-style:italic;">"Tech affects every field. You should get to shape it back."
+        </p>
+
+        <div class="majors-grid">
+            <div class="major-chip">Anthropology</div>
+            <div class="major-chip">Economics</div>
+            <div class="major-chip">Physics</div>
+            <div class="major-chip">Math</div>
+            <div class="major-chip">Design</div>
+            <div class="major-chip">Studio Art</div>
+            <div class="major-chip">Computer Science</div>
+            <div class="major-chip">Music</div>
+            <div class="major-chip">Psychology</div>
+            <div class="major-chip">English</div>
+            <div class="major-chip">Architecture</div>
+            <div class="major-chip">Biology</div>
+        </div>
+    </section>
+
+    <!-- EVENTS CAROUSEL -->
+    <section id="events" class="container section-padding">
+        <h2 class="pixel-font text-center" style="margin-bottom:40px;">Current Events</h2>
+
+        <div class="carousel-container">
+            <div class="carousel-track" id="track">
+                <!-- Slide 1: Hackathon -->
+                <div class="carousel-slide">
+                    <img src="https://images.lumacdn.com/event-covers/2j/133741ca-b9d4-4aae-bddb-6966b7ce9bc4.gif"
+                        alt="Hackathon" class="slide-bg">
+                    <div class="slide-content">
+                        <h3 class="pixel-font">Worlds in Action Hackathon</h3>
+                        <p style="margin: 15px 0;">Join us in SF (March 14) for 40+ robots, PICO devkits & judging from
+                            Meta/Google.</p>
+                        <a href="https://luma.com/worldsinaction-sf26" target="_blank" class="btn-pixel btn-red">Apply
+                            Now</a>
+                    </div>
+                </div>
+                <!-- Slide 2: Pre-Hack Workshops -->
+                <div class="carousel-slide">
+                    <div style="background:var(--accent-blue); position:absolute; inset:0; opacity:0.2;"></div>
+                    <div class="slide-content">
+                        <h3 class="pixel-font">Pre-Hack Virtual Workshops</h3>
+                        <p style="margin: 15px 0;">100% Free, Remote, Open to ANYONE! Starts March 4. Learn Unity,
+                            Unreal, WebXR & Isaac.</p>
+                        <a href="https://lnkd.in/g8-rT94R" target="_blank" class="btn-pixel">Register Free</a>
+                    </div>
+                </div>
+                <!-- Slide 3: Ambassador -->
+                <div class="carousel-slide">
+                    <div style="background:var(--accent-green); position:absolute; inset:0; opacity:0.2;"></div>
+                    <div class="slide-content">
+                        <h3 class="pixel-font">Ambassador Opportunity</h3>
+                        <p style="margin: 15px 0;">Help spread the word for the Hackathon! Get a Free XR Fellowship
+                            ($1800 value).</p>
+                        <a href="https://forms.gle/oNGMjPNbbYwexus4A" target="_blank" class="btn-pixel btn-green">Apply
+                            Here</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-nav">
+                <button class="prev-btn" id="prevBtn">&lt;</button>
+                <button class="next-btn" id="nextBtn">&gt;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GDC SECTION -->
+    <!-- HACKATHON SECTION -->
+    <section id="hackathon" class="gdc-section section-padding">
+        <div class="container">
+            <div class="text-center" style="margin-bottom:50px;">
+                <h2 class="pixel-font" style="font-size:2rem; color:var(--text-main); text-shadow: 2px 2px 0 #fff;">
+                    WORLDS IN ACTION HACKATHON<br>& XR BOOTCAMP COLLAB</h2>
+
+                <p style="max-width:700px; margin:20px auto; font-size:1.1rem; line-height:1.6;">
+                    PIXL is extremely proud to be one of the main organizers of this incredible hackathon in San
+                    Francisco—in collaboration with ICXR and XR Bootcamp.<br><br>
+                    Focusing on "world models" simulating real-world physics, this in-person event features <strong>40+
+                        robots on-site</strong>, PICO devkits, and judges from <strong>Google, Meta, ByteDance, and
+                        Niantic.</strong>
+                    <br>
+                    <span
+                        style="display:inline-block; margin-top:10px; font-weight:bold; background:var(--accent-yellow); padding:5px 10px; border:2px solid #000; box-shadow:4px 4px 0 rgba(0,0,0,0.1);">MARCH
+                        14, 2026 - SAN FRANCISCO</span>
+                </p>
+
+                <p style="margin-top:10px;"><a href="https://luma.com/worldsinaction-sf26" target="_blank"
+                        class="btn-pixel btn-red">Apply to Attend the Hackathon</a></p>
+            </div>
+
+            <div class="gdc-layout">
+                <!-- Pre-Hack Workshops -->
+                <div class="gdc-card"
+                    style="border-color:var(--accent-blue); box-shadow:8px 8px 0px rgba(116, 185, 255, 0.5);">
+                    <span class="pixel-font"
+                        style="background:var(--accent-blue); color:#fff; padding:5px 10px; font-size:0.7rem;">HEAVY
+                        PROMOTION</span>
+                    <h3 style="margin:15px 0;">PRE-HACK VIRTUAL WORKSHOPS</h3>
+                    <p style="margin-bottom:20px;"><strong>100% FREE, REMOTE, and OPEN TO ANYONE!</strong> Even if you
+                        are not attending the physical hackathon, you can join.</p>
+                    <p style="margin-bottom:20px;">Starts <strong>March 4</strong>. Learn to integrate world model
+                        workflows into Unity, Unreal Engine, WebXR, and NVIDIA Isaac.</p>
+                    <a href="https://lnkd.in/g8-rT94R" target="_blank" class="btn-pixel btn-blue"
+                        style="width:100%; text-align:center;">Register Free</a>
+                </div>
+
+                <!-- Ambassador Opportunity -->
+                <div class="gdc-card"
+                    style="border-color:var(--accent-green); box-shadow:8px 8px 0px rgba(85, 239, 196, 0.5);">
+                    <span class="pixel-font"
+                        style="background:var(--accent-green); color:#2d3436; padding:5px 10px; font-size:0.7rem;">NEW
+                        ROLE</span>
+                    <h3 style="margin:15px 0;">AMBASSADOR OPPORTUNITY</h3>
+                    <p style="margin-bottom:20px;">We're building a student ambassador network! ~4-5 hrs/week (remote,
+                        now through March 14). Help spread the word and engage.</p>
+                    <p style="margin-bottom:20px;"><strong>Perks:</strong> Free XR Design Fellowship ($1800 value),
+                        build portfolio, get guidance from Meta, Microsoft, and Samsung mentors.</p>
+                    <a href="https://forms.gle/oNGMjPNbbYwexus4A" target="_blank" class="btn-pixel btn-green"
+                        style="width:100%; text-align:center;">Apply as Ambassador</a>
+                    <p style="font-size:0.8rem; color:#666; margin-top:10px; text-align:center;">Rolling admissions,
+                        limited spots!</p>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:50px;">
+                <a href="https://xrbootcamp.com/xr-design/" target="_blank">
+                    <img src="https://xrbootcamp.com/wp-content/uploads/2023/06/2-1024x512.png" alt="XR Bootcamp"
+                        style="width:100%; max-width:800px; margin:0 auto; border:4px solid #000; box-shadow: 8px 8px 0px #000;">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOIN & INVOLVE -->
+    <section id="join" class="container section-padding">
+        <h2 class="pixel-font text-center" style="margin-bottom:40px;">Get Involved</h2>
+
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:30px;">
+            <!-- Student -->
+            <div class="pixel-box">
+                <h3 class="pixel-font">Students</h3>
+                <p style="margin:15px 0;">Join our chapter at UMD via TerpLink to get official updates.</p>
+                <a href="https://terplink.umd.edu/organization/pixl" target="_blank" class="btn-pixel">Join UMD
+                    Chapter</a>
+            </div>
+
+            <!-- Branch -->
+            <div class="pixel-box">
+                <h3 class="pixel-font">Start a Branch</h3>
+                <p style="margin:15px 0;">Not at UMD? Bring PIXL to your university.</p>
+                <a href="#" class="btn-pixel btn-secondary">Branch Interest Form</a>
+            </div>
+
+            <!-- Speaker -->
+            <div class="pixel-box">
+                <h3 class="pixel-font">Speakers & Mentors</h3>
+                <p style="margin:15px 0;">Share your industry wisdom with the next generation.</p>
+                <a href="#" class="btn-pixel btn-secondary">Speaker Interest Form</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCOMPLISHMENTS -->
+    <section id="accomplishments" class="container section-padding text-center"
+        style="border-top:var(--pixel-border-thin);">
+        <h2 class="pixel-font" style="margin-bottom:30px;">Our Accomplishments</h2>
+
+        <div class="pixel-box"
+            style="display:inline-block; text-align:left; max-width:800px; border-color:var(--accent-purple); box-shadow:6px 6px 0px var(--accent-purple);">
+            <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1;">
+                    <h3 class="pixel-font" style="margin-bottom:10px; font-size:1.2rem;">GDC 2026 Trip</h3>
+                    <p>We successfully organized a major trip to the Game Developers Conference. By securing $12,000 in
+                        scholarships, we brought 10 university women from across the nation to GDC, providing each of
+                        them with a free pass worth $1,200. This gave them the opportunity to engage directly with the
+                        global gaming industry and marked a massive milestone for our growing community!</p>
+                </div>
+                <div style="font-size:3rem;">🌉</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEADERSHIP -->
+    <section class="container section-padding" style="border-top:var(--pixel-border-thin);">
+        <h2 class="pixel-font text-center" style="margin-bottom:40px;">Leadership</h2>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="ananya_profile.png" alt="Ananya Srinivasan"
+                    style="width:80px; height:80px; border-radius:50%; border:2px solid #000; margin:0 auto 15px; object-fit: cover;">
+                <h4 class="pixel-font" style="font-size:0.8rem;"><a href="https://www.linkedin.com/in/asriniv"
+                        target="_blank" style="text-decoration:none; color:inherit;">Ananya Srinivasan</a></h4>
+                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Founder & President</p>
+            </div>
+            <div class="team-card">
+                <img src="ashley_profile.jpg" alt="Ashley Qiao"
+                    style="width:80px; height:80px; border-radius:50%; border:2px solid #000; margin:0 auto 15px; object-fit: cover;">
+                <h4 class="pixel-font" style="font-size:0.8rem;">Ashley Qiao</h4>
+                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Vice President</p>
+            </div>
+            <div class="team-card">
+                <div class="avatar-placeholder"></div>
+                <h4 class="pixel-font" style="font-size:0.8rem;">Officer Name</h4>
+                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Role Title</p>
+            </div>
+            <div class="team-card">
+                <div class="avatar-placeholder"></div>
+                <h4 class="pixel-font" style="font-size:0.8rem;">Join Us</h4>
+                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Applications Open</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p style="margin-bottom:10px;">PIXL: People, Interaction, and eXperience Lab</p>
+            <p style="color:#aaa; font-family:var(--font-body); margin-bottom:20px;">Empowering overlooked voices in
+                tech.</p>
+            <div style="display:flex; justify-content:center; align-items:center; gap:30px; margin-bottom:20px;">
+                <a href="https://instagram.com/join.pixl" target="_blank" title="Instagram: @join.pixl">
+                    <img src="instagram_icon.png" alt="Instagram" class="social-icon">
+                </a>
+                <a href="https://discord.gg/HnxZbA6fj5" target="_blank" title="Join our Discord">
+                    <img src="discord_icon.png" alt="Discord" class="social-icon">
+                </a>
+            </div>
+            <p><a href="mailto:asrini14@terpmail.umd.edu" style="color:#aaa; text-decoration:none;">Contact:
+                    asrini14@terpmail.umd.edu</a></p>
+            <p style="margin-top:30px; opacity:0.5;">&copy; 2026 PIXL Organization</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- CAROUSEL LOGIC ---
+        const track = document.getElementById('track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slides = Array.from(track.children);
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const width = slides[0].getBoundingClientRect().width;
+            track.style.transform = 'translateX(-' + (currentIndex * width) + 'px)';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        });
+
+        // Auto rotate
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }, 5000);
+
+        window.addEventListener('resize', updateCarousel);
+
+        // --- ACCORDION LOGIC ---
+        const accordions = document.querySelectorAll('.accordion-item');
+
+        accordions.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                // Toggle current
+                item.classList.toggle('active');
+
+                // Optional: Close others
+                // accordions.forEach(other => {
+                //     if (other !== item) other.classList.remove('active');
+                // });
+            });
+        });
+
+        // --- CONFETTI PLACEHOLDER ---
+        // Simple console log for where celebration logic would go
+        console.log("PIXL Website Loaded - Ready for interactions.");
+
+        // --- MAJOR CHIPS RANDOM ANGLE ---
+        // Add slight random rotation to chips for organic feel
+        document.querySelectorAll('.major-chip').forEach(chip => {
+            const randomDeg = (Math.random() * 4) - 2; // -2 to +2 deg
+            chip.style.transform = `rotate(${randomDeg}deg)`;
+
+            chip.addEventListener('mouseenter', () => {
+                chip.style.transform = 'scale(1.1) rotate(0deg)';
+                chip.style.borderColor = 'var(--accent-purple)';
+            });
+            chip.addEventListener('mouseleave', () => {
+                chip.style.transform = `rotate(${randomDeg}deg)`;
+                chip.style.borderColor = '#2d3436';
+            });
+        });
+
+
+        // --- TYPING EFFECT ---
+        const heroTitle = document.getElementById('hero-title');
+        const textToType = "Where everyone can\nbuild their future.";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < textToType.length) {
+                const char = textToType.charAt(charIndex);
+                if (char === '\n') {
+                    heroTitle.innerHTML += '<br>';
+                } else {
+                    heroTitle.innerHTML += char;
+                }
+                charIndex++;
+                setTimeout(typeWriter, 50); // Typing speed
+            } else {
+                // Add blinking cursor at the end
+                heroTitle.innerHTML += '<span class="cursor" style="display:inline-block; width:10px; height:1em; background:var(--accent-purple); animation: blink 1s infinite; vertical-align:text-bottom; margin-left:5px;"></span>';
+            }
+        }
+
+        // Start typing on load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 500); // Slight delay before start
+        });
+
+        // Add blink keyframes to style
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+    </script>
+</body>
+
+</html>
