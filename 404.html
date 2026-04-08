@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | PIXL</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --bg-pattern: #f0f0f0;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --accent-purple: #a29bfe;
+            --accent-red: #ff7675;
+            --font-pixel: 'Press Start 2P', cursive;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            background-image: radial-gradient(var(--bg-pattern) 1px, transparent 1px);
+            background-size: 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-container {
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-family: var(--font-pixel);
+            font-size: 6rem;
+            color: var(--accent-red);
+            text-shadow: 4px 4px 0 #2d3436;
+            margin-bottom: 20px;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
+
+        .error-title {
+            font-family: var(--font-pixel);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-pixel {
+            display: inline-block;
+            font-family: var(--font-pixel);
+            font-size: 0.8rem;
+            padding: 16px 24px;
+            background: var(--accent-purple);
+            color: #fff;
+            border: 4px solid #2d3436;
+            box-shadow: 4px 4px 0px #2d3436;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-pixel:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #2d3436;
+        }
+
+        .btn-pixel:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+            image-rendering: pixelated;
+        }
+
+        .pixel-deco {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 1rem;
+            }
+
+            .btn-pixel {
+                font-size: 0.7rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <span class="pixel-deco" style="top:20%; left:10%; color: var(--accent-red)">✚</span>
+    <span class="pixel-deco" style="top:15%; right:15%; color: #74b9ff; animation-delay: 1s;">●</span>
+    <span class="pixel-deco" style="bottom:20%; left:20%; color: #55efc4; animation-delay: 0.5s;">★</span>
+    <span class="pixel-deco" style="bottom:30%; right:10%; color: #ffeaa7; animation-delay: 1.5s;">■</span>
+
+    <div class="error-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="favicon.png" alt="PIXL Butterfly Logo">
+            </a>
+        </div>
+
+        <div class="error-code">404</div>
+        <h1 class="error-title">PAGE NOT FOUND</h1>
+        <p class="error-message">
+            Oops! Looks like this page got lost in the metaverse. 
+            The link you followed may be broken, or the page may have been removed.
+        </p>
+
+        <a href="index.html" class="btn-pixel">Return Home</a>
+    </div>
+</body>
+
+</html>
