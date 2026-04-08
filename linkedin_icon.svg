@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <!-- Background with pixelated rounded corners like Instagram/Discord icons -->
+  <rect fill="#0A66C2" x="1" y="0" width="14" height="1"/>
+  <rect fill="#0A66C2" x="0" y="1" width="16" height="14"/>
+  <rect fill="#0A66C2" x="1" y="15" width="14" height="1"/>
+  
+  <!-- LinkedIn 'in' logo pixelated -->
+  <!-- Left bar (i) -->
+  <rect fill="white" x="3" y="6" width="2" height="6"/>
+  <!-- Dot on i -->
+  <rect fill="white" x="3" y="3" width="2" height="2"/>
+  
+  <!-- Right part (n) -->
+  <rect fill="white" x="7" y="6" width="2" height="6"/>
+  <rect fill="white" x="9" y="7" width="1" height="1"/>
+  <rect fill="white" x="10" y="6" width="1" height="1"/>
+  <rect fill="white" x="11" y="6" width="2" height="6"/>
+</svg>
