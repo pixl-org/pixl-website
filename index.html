@@ -447,6 +447,11 @@
                 font-size: 0.85rem;
             }
 
+            /* Get Involved grid mobile */
+            #join .grid {
+                grid-template-columns: 1fr !important;
+            }
+
             .gdc-card {
                 padding: 20px;
             }
@@ -1115,8 +1120,14 @@
             </div>
 
             <div class="carousel-nav">
-                <button class="prev-btn" id="prevBtn">&lt;</button>
-                <button class="next-btn" id="nextBtn">&gt;</button>
+                <button class="prev-btn" id="prevBtn">&#8592;</button>
+                <button class="next-btn" id="nextBtn">&#8594;</button>
+            </div>
+
+            <!-- Slide indicators -->
+            <div id="carouselDots" style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10;">
+                <span class="carousel-dot active" data-index="0" style="width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid #000; cursor:pointer;"></span>
+                <span class="carousel-dot" data-index="1" style="width:12px; height:12px; border-radius:50%; background:#666; border:2px solid #000; cursor:pointer;"></span>
             </div>
         </div>
     </section>
@@ -1201,7 +1212,7 @@
         <h2 class="pixel-font text-center" style="margin-bottom:15px;">Get Involved</h2>
         <p class="text-center" style="max-width:700px; margin:0 auto 40px; color:var(--text-light);">PIXL is an intercollegiate community with university chapters. We host events at hackathons, conferences, and campuses across the country — plus virtual events so you can participate from anywhere.</p>
 
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:30px;">
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap:30px;">
             <!-- Discord Community -->
             <div class="pixel-box" style="border-color:var(--accent-purple); box-shadow:6px 6px 0px var(--accent-purple);">
                 <h3 class="pixel-font" style="font-size:0.85rem;">Join the Community</h3>
@@ -1228,6 +1239,20 @@
                 <h3 class="pixel-font" style="font-size:0.85rem;">Partner With Us</h3>
                 <p style="margin:15px 0;">We've collaborated with XR Bootcamp, co-hosted hackathons nationwide, and we're always looking for new partners. Let's build something together.</p>
                 <a href="mailto:info.joinpixl@gmail.com" class="btn-pixel btn-secondary">Get in Touch</a>
+            </div>
+
+            <!-- Speak / Mentor -->
+            <div class="pixel-box" style="border-color:var(--accent-green); box-shadow:6px 6px 0px var(--accent-green);">
+                <h3 class="pixel-font" style="font-size:0.85rem;">Become a Speaker or Mentor</h3>
+                <p style="margin:15px 0;">Work in XR, game dev, or HCI? Share your expertise with the next generation — lead workshops, give talks, or mentor students.</p>
+                <a href="mailto:info.joinpixl@gmail.com" class="btn-pixel btn-secondary">Get in Touch</a>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="pixel-box" style="border-color:var(--accent-yellow); box-shadow:6px 6px 0px var(--accent-yellow);">
+                <h3 class="pixel-font" style="font-size:0.85rem;">Stay in the Loop</h3>
+                <p style="margin:15px 0;">Subscribe to our newsletter for updates on events, opportunities, and what's happening in the PIXL community.</p>
+                <a href="404.html" class="btn-pixel btn-secondary">Subscribe</a>
             </div>
         </div>
     </section>
@@ -1331,6 +1356,10 @@
         function updateCarousel() {
             const width = slides[0].getBoundingClientRect().width;
             track.style.transform = 'translateX(-' + (currentIndex * width) + 'px)';
+            // Update dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                dot.style.background = i === currentIndex ? '#fff' : '#666';
+            });
         }
 
         function pauseCarousel() {
@@ -1364,6 +1393,15 @@
         }, 5000);
 
         window.addEventListener('resize', updateCarousel);
+
+        // Dot click navigation
+        document.querySelectorAll('.carousel-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.dataset.index);
+                updateCarousel();
+                pauseCarousel();
+            });
+        });
 
         // --- MAJOR CHIPS RANDOM ANGLE ---
         // Add slight random rotation to chips for organic feel
