@@ -24,6 +24,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
 
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
@@ -66,11 +69,12 @@
             background-color: var(--bg-color);
             background-image: radial-gradient(var(--bg-pattern) 1px, transparent 1px);
             background-size: 20px 20px;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.7;
             overflow-x: hidden;
             cursor: default;
-            /* We'll add a custom cursor via JS hint strictly if needed, but standard is safer for now */
         }
+
 
         a {
             text-decoration: none;
@@ -193,7 +197,7 @@
         }
 
         .btn-pixel:active {
-            transform: translate(2px, 2px);
+            transform: scale(0.95);
             box-shadow: 2px 2px 0px #000;
         }
 
@@ -896,7 +900,7 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo">
+            <a class='logo' href="index.html">
                 <img src="pixl_logo_pixel.png" alt="PIXL Logo">
             </a>
             <div class="nav-links">
@@ -921,7 +925,7 @@
                         style="width:24px; height:24px; image-rendering:pixelated; transition:transform 0.2s;"
                         onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
-                <a href="404.html" title="Newsletter">
+                <a href="404.html" title='Newsletter'>
                     <img src="substack_icon.svg" alt="Newsletter"
                         style="width:24px; height:24px; image-rendering:pixelated; transition:transform 0.2s;"
                         onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
@@ -1084,19 +1088,21 @@
             <div class="carousel-track" id="track">
                 <!-- Slide 1: ImmerseGT x PIXL -->
                 <div class="carousel-slide">
-                    <div style="background:var(--accent-purple); position:absolute; inset:0; opacity:0.2;"></div>
+                    <img src="https://www.immersegt.org/_next/image?url=%2Fbrand_kit%2FImmerseGT%20Hands.webp&w=3840&q=75" class="slide-bg" alt="ImmerseGT Background">
+                    <div style="background:var(--accent-purple); position:absolute; inset:0; opacity:0.4;"></div>
                     <div class="slide-content">
                         <h3 class="pixel-font">Enter the Metaverse with PIXL</h3>
                         <p style="margin: 10px 0; font-size:0.95rem;">Build at the frontiers of XR at ImmerseGT — the largest XR hackathon in the South. PIXL is running a hybrid Unity workshop on April 10th, 1-2pm at Georgia Tech. Join in person or tune in online!</p>
                         <div style="display:flex; gap:10px; flex-wrap:nowrap; justify-content:center;">
                             <a href="https://www.immersegt.org" target="_blank" class="btn-pixel">Register at ImmerseGT</a>
-                            <a href="404.html" class="btn-pixel btn-secondary">Watch Online</a>
+                            <a class='btn-pixel btn-secondary' href="404.html">Watch Online</a>
                         </div>
                     </div>
                 </div>
                 <!-- Slide 2: Pacific Portal Hackathon -->
                 <div class="carousel-slide">
-                    <div style="background:var(--accent-blue); position:absolute; inset:0; opacity:0.2;"></div>
+                    <img src="https://d112y698adiu2z.cloudfront.net/photos/production/challenge_photos/004/402/086/datas/full_width.png" class="slide-bg" alt="Pacific Portal Background">
+                    <div style="background:var(--accent-blue); position:absolute; inset:0; opacity:0.4;"></div>
                     <div class="slide-content">
                         <h3 class="pixel-font">Pacific Portal Hackathon</h3>
                         <p style="margin: 15px 0;">PIXL is a sponsor for Pacific Portal, the Reality Hack of the West Coast! 48-hour AR/VR hackathon, fully online.</p>
@@ -1123,13 +1129,15 @@
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:30px;">
             <!-- Worlds in Action Hackathon -->
             <div class="pixel-box">
+                <img src="WorldsinAction.png" style="width:100%; height:180px; object-fit:cover; border:2px solid #000; margin-bottom:15px;" alt="Worlds in Action Hackathon">
                 <span class="pixel-font" style="background:var(--accent-red); color:#fff; padding:5px 10px; font-size:0.6rem;">MARCH 2026</span>
                 <h3 class="pixel-font" style="margin:15px 0; font-size:0.9rem;">Worlds in Action Hackathon</h3>
-                <p style="margin-bottom:15px;">We co-organized an incredible hackathon in San Francisco with ICXR and XR Bootcamp. The event featured 40+ robots on-site, PICO devkits, and judges from Google, Meta, ByteDance, and Niantic.</p>
+                <p style="margin-bottom:15px;">We co-organized an incredible hackathon in San Francisco with XR Bootcamp and over 200+ hackers! The event featured 40+ robots on-site, PICO devkits, and judges from Google, Meta, ByteDance, and Niantic.</p>
             </div>
 
             <!-- XR Design Fellowship -->
             <div class="pixel-box">
+                <img src="xrbootcamp.png" style="width:100%; height:180px; object-fit:cover; border:2px solid #000; margin-bottom:15px;" alt="XR Design Fellowship">
                 <span class="pixel-font" style="background:var(--accent-purple); color:#fff; padding:5px 10px; font-size:0.6rem;">FELLOWSHIP</span>
                 <h3 class="pixel-font" style="margin:15px 0; font-size:0.9rem;">XR Design Fellowship</h3>
                 <p style="margin-bottom:15px;">We partnered with XR Bootcamp to provide free XR Design Fellowships valued at $1,800 to our student ambassadors. Members got guidance from mentors at Meta, Microsoft, and Samsung.</p>
@@ -1137,9 +1145,10 @@
 
             <!-- Pre-Hack Workshops -->
             <div class="pixel-box">
+                <img src="immersegt.jpg" style="width:100%; height:auto; max-height:250px; object-fit:contain; background:#000; border:2px solid #000; margin-bottom:15px;" alt="Virtual Workshops">
                 <span class="pixel-font" style="background:var(--accent-blue); color:#fff; padding:5px 10px; font-size:0.6rem;">WORKSHOPS</span>
                 <h3 class="pixel-font" style="margin:15px 0; font-size:0.9rem;">Virtual Workshops</h3>
-                <p style="margin-bottom:15px;">We hosted free virtual workshops open to anyone, teaching Unity, Unreal Engine, WebXR, and NVIDIA Isaac. Hundreds of students learned to integrate world model workflows.</p>
+                <p style="margin-bottom:15px;">We hosted free virtual workshops open to anyone, teaching Unity, Unreal Engine, WebXR, and NVIDIA Isaac. Hundreds of students learned to integrate world model and Unity development workflows.</p>
             </div>
         </div>
     </section>
@@ -1152,15 +1161,13 @@
                 <h2 class="pixel-font" style="font-size:1.8rem; color:var(--text-main); text-shadow: 2px 2px 0 #fff;">
                     Worlds in Action Hackathon</h2>
                 <p style="max-width:700px; margin:20px auto; font-size:1.1rem; line-height:1.6;">
-                    PIXL was proud to be one of the main organizers of this incredible hackathon in San Francisco, in collaboration with ICXR and XR Bootcamp. Focusing on "world models" simulating real-world physics, this in-person event featured <strong>40+ robots on-site</strong>, PICO devkits, and judges from <strong>Google, Meta, ByteDance, and Niantic.</strong>
+                    PIXL was proud to be one of the main organizers of this incredible hackathon in San Francisco, in collaboration with XR Bootcamp and over 200+ hackers! Focusing on "world models" simulating real-world physics, this in-person event featured <strong>40+ robots on-site</strong>, PICO devkits, and judges from <strong>Google, Meta, ByteDance, and Niantic.</strong>
                 </p>
             </div>
 
             <div style="text-align:center;">
-                <a href="https://xrbootcamp.com/xr-design/" target="_blank">
-                    <img src="https://xrbootcamp.com/wp-content/uploads/2023/06/2-1024x512.png" alt="XR Bootcamp"
-                        style="width:100%; max-width:800px; margin:0 auto; border:4px solid #000; box-shadow: 8px 8px 0px #000;">
-                </a>
+                <img src="worldmodels.jpg" alt="Worlds In Action Hackathon"
+                    style="width:100%; max-width:800px; margin:0 auto; border:4px solid #000; box-shadow: 8px 8px 0px #000;">
             </div>
         </div>
     </section>
@@ -1244,19 +1251,30 @@
                 <p style="font-size:0.9rem; margin-top:5px; color:#666;">Founder & President</p>
             </div>
             <div class="team-card">
-                <div class="avatar-placeholder"></div>
+                <img src="anaya_headshot.jpeg" alt="Anaya Yorke"
+                    style="width:80px; height:80px; border-radius:50%; border:2px solid #000; margin:0 auto 15px; object-fit: cover;">
                 <h4 class="pixel-font" style="font-size:0.8rem;">Anaya Yorke</h4>
                 <p style="font-size:0.9rem; margin-top:5px; color:#666;">VP & Partnerships Lead</p>
             </div>
             <div class="team-card">
-                <div class="avatar-placeholder"></div>
-                <h4 class="pixel-font" style="font-size:0.8rem;">Officer Name</h4>
-                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Role Title</p>
+                <img src="roshni_headshot.png" alt="Roshni Muruganandam"
+                    style="width:80px; height:80px; border-radius:50%; border:2px solid #000; margin:0 auto 15px; object-fit: cover;">
+                <h4 class="pixel-font" style="font-size:0.8rem;">Roshni Muruganandam</h4>
+                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Treasurer &amp; Funding Lead</p>
             </div>
             <div class="team-card">
-                <div class="avatar-placeholder"></div>
-                <h4 class="pixel-font" style="font-size:0.8rem;">Join Us</h4>
-                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Applications Open</p>
+                <img src="aishah_headshot.jpg" alt="Aishah Gudaro"
+                    style="width:80px; height:80px; border-radius:50%; border:2px solid #000; margin:0 auto 15px; object-fit: cover;">
+                <h4 class="pixel-font" style="font-size:0.8rem;">Aishah Gudaro</h4>
+                <p style="font-size:0.9rem; margin-top:5px; color:#666;">Communications Lead</p>
+            </div>
+            <div class="team-card">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSddhw9cPQCYsk0EEp5C5NXPR2r8eJq24L1l1T0zGLnZkeuTYQ/viewform?usp=header" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                    <img src="pixl_butterfly_logo.png" alt="Join Us"
+                        style="width:80px; height:80px; border-radius:50%; border:2px solid #000; margin:0 auto 15px; background:white; object-fit: cover;">
+                    <h4 class="pixel-font" style="font-size:0.8rem; color:var(--accent-purple);">Join Us</h4>
+                    <p style="font-size:0.9rem; margin-top:5px; color:#666;">Applications Open</p>
+                </a>
             </div>
         </div>
     </section>
@@ -1277,7 +1295,7 @@
                 <a href="https://www.linkedin.com/company/joinpixl/" target="_blank" title="LinkedIn">
                     <img src="linkedin_icon.svg" alt="LinkedIn" class="social-icon">
                 </a>
-                <a href="404.html" title="Newsletter">
+                <a href="404.html" title='Newsletter'>
                     <img src="substack_icon.svg" alt="Newsletter" class="social-icon">
                 </a>
             </div>
@@ -1374,7 +1392,17 @@
         `;
         document.head.appendChild(styleSheet);
 
-
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('section > .container > div, section > h2, section > p, .grid > div, .team-grid > div').forEach(el => {
+                if (!el.hasAttribute('data-aos')) {
+                    el.setAttribute('data-aos', 'fade-up');
+                }
+            });
+            AOS.init({ duration: 800, once: true });
+        });
     </script>
 </body>
 
